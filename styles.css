@@ -1,0 +1,276 @@
+:root {
+  --bg-color: #030712;
+  --glow-color: #00ffff;
+  --text-color: #f0f8ff;
+  --dim-color: #475569;
+  --accent-color: #f3540a;
+  --visited-color: #22c55e;
+  --wrong-color: #f43f5e;
+  --soil-color: #6b462a;
+  --grass-color: #4ade80;
+  --sidebar-bg: #0f172a;
+  --font-main: "Segoe UI", "Roboto", "Helvetica Neue", system-ui, sans-serif;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  font-family: var(--font-main);
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+}
+
+.top-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 1.5rem;
+  background-color: #091111;
+  border-bottom: 1px solid var(--dim-color);
+}
+
+.top-header .header-logo {
+  height: 7.5vh; /* 10% of the viewport height */
+}
+
+.header-title {
+  text-align: center;
+}
+
+.top-header h1 {
+  font-size: 2.75rem;
+  color: var(--accent-color);
+  margin: 0;
+}
+
+.header-title h4 {
+  font-size: 1rem;
+  font-weight: normal;
+  margin: 0.25rem 0 0 0;
+  color: var(--text-color);
+}
+
+#main-container {
+  display: flex;
+  flex: 1; /* This makes the container grow to fill remaining space */
+  min-height: 0; /* Prevents flexbox overflow issues */
+}
+
+#simulation-wrapper {
+  flex: 1;
+  position: relative;
+  min-height: 0;
+  min-width: 0; /* Prevents flexbox from collapsing canvas */
+}
+
+#sidebar,
+#right-sidebar {
+  width: 320px;
+  flex-shrink: 0;
+  background-color: var(--sidebar-bg);
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+}
+
+#sidebar {
+  border-right: 1px solid var(--dim-color);
+}
+
+#right-sidebar {
+  border-left: 1px solid var(--dim-color);
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.game-stats {
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  background: rgba(3, 7, 18, 0.7);
+  padding: 0.75rem 1.25rem;
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-sizing: border-box;
+}
+
+.carousel-container {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.carousel-slides {
+  flex-grow: 1;
+  position: relative;
+  overflow: hidden;
+  border-radius: 8px;
+}
+
+.carousel-slide {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  padding: 1rem;
+  background: rgba(3, 7, 18, 0.5);
+  opacity: 0;
+  transition: opacity 0.6s ease;
+  box-sizing: border-box;
+}
+
+.carousel-slide.active {
+  opacity: 1;
+}
+
+.carousel-slide h3 {
+  color: var(--accent-color);
+  margin-top: 0;
+}
+
+.carousel-controls {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 1rem;
+}
+
+.carousel-controls button {
+  background: var(--accent-color);
+  color: var(--bg-color);
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.complexity-slider {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--text-color);
+}
+
+.complexity-slider input[type="range"] {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 120px;
+  height: 8px;
+  background: var(--dim-color);
+  border-radius: 5px;
+  outline: none;
+  cursor: pointer;
+}
+
+.complexity-slider input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 20px;
+  height: 20px;
+  background: var(--accent-color);
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.complexity-slider input[type="range"]::-moz-range-thumb {
+  width: 20px;
+  height: 20px;
+  background: var(--accent-color);
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+/* The p5.js canvas will be placed here */
+#canvas-container {
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+}
+
+.footer {
+  pointer-events: all;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  gap: 1rem;
+}
+
+/* Non-intrusive Question Panel */
+.question-panel {
+  display: none; /* Hidden by default */
+  width: 100%;
+  text-align: center;
+  pointer-events: all;
+}
+
+.question-panel.visible {
+  display: block; /* Shown when active */
+}
+
+.question {
+  font-size: 1.25rem;
+  color: var(--accent-color);
+  margin-bottom: 1rem;
+  line-height: 1.4;
+}
+
+.answers {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+}
+
+.answers button {
+  flex-grow: 1;
+  padding: 1rem;
+  font-size: 1rem;
+  background-color: var(--accent-color);
+  color: var(--bg-color);
+  font-weight: bold;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.answers button:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 5px 20px rgba(56, 189, 248, 0.3);
+}
+
+.game-button {
+  padding: 1rem 2rem;
+  border: 1px solid var(--accent-color);
+  background: var(--accent-color);
+  color: var(--bg-color);
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 1.2rem;
+  font-weight: bold;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.game-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 15px rgba(56, 189, 248, 0.4);
+}
+
+#end-summary {
+  background: rgba(3, 7, 18, 0.8);
+  backdrop-filter: blur(10px);
+  padding: 1.5rem;
+  border-radius: 12px;
+  border: 1px solid var(--accent-color);
+  text-align: center;
+}

@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="A generative art game where you climb a fractal tree by answering questions."
+    />
+    <title>Understanding Decision Trees</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.0/p5.js"></script>
+    <script src="main.js"></script>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+
+  <body>
+    <header class="top-header">
+      <!--This link current seems to be functioning - 
+      but if you want to upload your own file into the images folder you can replace the src with the image file address
+      i.e., ".Images/image_name.extentsion" -->
+      <img
+        src="http://threespirestrust.org/wp-content/uploads/2022/01/Three-Spires-Trust-Logo.png"
+        alt="Header Logo"
+        class="header-logo"
+      />
+      <div class="header-title">
+        <h1>Treevia!</h1>
+        <h4>A trivia game that teaches you how decision trees work</h4>
+      </div>
+      <img
+        src="./Images/HAU_full_wordmarque_white.png"
+        alt="Harper Adams Logo"
+        class="header-logo"
+      />
+    </header>
+    <div id="main-container">
+      <aside id="sidebar">
+        <div class="carousel-container">
+          <h2>How Decision Trees Work</h2>
+          <div class="carousel-slides" id="carousel-slides">
+            <!-- Slides will be injected by JS -->
+          </div>
+          <div class="carousel-controls">
+            <button id="carousel-prev">Previous</button>
+            <button id="carousel-next">Next</button>
+          </div>
+        </div>
+      </aside>
+      <div id="simulation-wrapper">
+        <div id="canvas-container"></div>
+      </div>
+      <aside id="right-sidebar">
+        <div class="game-stats">
+          <span>Score: <span id="score">0</span></span>
+          <span>Penalty: <span id="penalty">0</span></span>
+        </div>
+        <div class="footer" id="footer-controls">
+          <div
+            id="start-controls"
+            style="
+              display: flex;
+              flex-direction: column;
+              align-items: center;
+              gap: 1rem;
+            "
+          >
+            <button id="start-btn" class="game-button">Start Quiz</button>
+            <div class="complexity-slider">
+              <label for="complexity">Complexity:</label>
+              <input
+                type="range"
+                id="complexity"
+                name="complexity"
+                min="1"
+                max="5"
+                value="3"
+              />
+              <span id="complexity-value">3</span>
+            </div>
+          </div>
+          <div id="end-summary-wrapper" style="display: none"></div>
+          <button id="restart-btn" class="game-button" style="display: none">
+            Play Again
+          </button>
+        </div>
+        <div class="question-panel" id="question-panel">
+          <h2 class="question" id="question-text"></h2>
+          <div class="answers" id="answers-container"></div>
+        </div>
+      </aside>
+    </div>
+  </body>
+</html>
